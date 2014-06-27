@@ -119,7 +119,7 @@ int force_vt = 1;
 int VBellWait, MsgWait, MsgMinWait, SilenceWait;
 
 extern struct acluser *users;
-extern struct display *displays, *display; 
+extern struct display *displays, *display;
 
 extern struct LayFuncs MarkLf;
 
@@ -262,7 +262,7 @@ char strnomem[] = "Out of memory.";
 static int InterruptPlease;
 static int GotSigChld;
 
-static int 
+static int
 lf_secreopen(name, wantfd, l)
 char *name;
 int wantfd;
@@ -298,7 +298,7 @@ struct passwd *ppp;
   struct spwd *sss = NULL;
   static char *spw = NULL;
 #endif
- 
+
   if (!ppp && !(ppp = getpwnam(name)))
     return NULL;
 
@@ -314,9 +314,9 @@ pw_try_again:
     {
       char c = ppp->pw_passwd[n];
       if (!(c == '.' || c == '/' || c == '$' ||
-	    (c >= '0' && c <= '9') || 
-	    (c >= 'a' && c <= 'z') || 
-	    (c >= 'A' && c <= 'Z'))) 
+	    (c >= '0' && c <= '9') ||
+	    (c >= 'a' && c <= 'z') ||
+	    (c >= 'A' && c <= 'Z')))
 	break;
     }
 
@@ -833,7 +833,7 @@ char **av;
           nwin_options.aka = SaveStr(nwin_options.aka);
         }
     }
-  
+
   if (SockMatch && strlen(SockMatch) >= MAXSTR)
     Panic(0, "Ridiculously long socketname - try again.");
   if (cmdflag && !rflag && !dflag && !xflag)
@@ -1305,7 +1305,7 @@ char **av;
   freopen("/dev/null", "w", stderr);
   debug("-- screen.back debug started\n");
 
-  /* 
+  /*
    * This guarantees that the session owner is listed, even when we
    * start detached. From now on we should not refer to 'LoginName'
    * any more, use users->u_name instead.
@@ -1344,7 +1344,7 @@ char **av;
     }
 #endif
   sprintf(SockPath + strlen(SockPath), "/%s", socknamebuf);
-  
+
   ServerSocket = MakeServerSocket();
   InitKeytab();
 #ifdef ETCSCREENRC
@@ -1358,7 +1358,7 @@ char **av;
   (void)StartRc(RcFileName, 0);
 # ifdef UTMPOK
 #  ifndef UTNOKEEP
-  InitUtmp(); 
+  InitUtmp();
 #  endif /* UTNOKEEP */
 # endif /* UTMPOK */
   if (display)
@@ -1440,7 +1440,7 @@ char **av;
 #ifdef HAVE_BRAILLE
   StartBraille();
 #endif
-  
+
   if (display && default_startup)
     display_copyright();
   signal(SIGINT, SigInt);
@@ -1603,7 +1603,7 @@ SigHup SIGDEFARG
   SIGRETURN;
 }
 
-/* 
+/*
  * the backend's Interrupt handler
  * we cannot insert the intrc directly, as we never know
  * if fore is valid.
@@ -1704,10 +1704,10 @@ DoWait()
   while ((pid = waitpid(-1, &wstat, WNOHANG | WUNTRACED)) > 0)
 # else
 # ifdef USE_WAIT2
-  /* 
-   * From: rouilj@sni-usa.com (John Rouillard) 
+  /*
+   * From: rouilj@sni-usa.com (John Rouillard)
    * note that WUNTRACED is not documented to work, but it is defined in
-   * /usr/include/sys/wait.h, so it may work 
+   * /usr/include/sys/wait.h, so it may work
    */
   while ((pid = wait2(&wstat, WNOHANG | WUNTRACED )) > 0)
 #  else /* USE_WAIT2 */
@@ -1729,7 +1729,7 @@ DoWait()
 	    {
 	      /* child has ceased to exist */
 	      p->w_pid = 0;
-		
+
 #ifdef BSDJOBS
 	      if (WIFSTOPPED(wstat))
 		{
@@ -1750,7 +1750,7 @@ DoWait()
 #endif
 		  /* Try to restart process */
 		  Msg(0, "Child has been stopped, restarting.");
-		  if (killpg(pid, SIGCONT))
+		  //if (killpg(pid, SIGCONT))
 		    kill(pid, SIGCONT);
 		}
 	      else
@@ -1840,7 +1840,7 @@ int i;
       Kill(D_userpid, SIG_BYE);
     }
   /*
-   * we _cannot_ call eexit(i) here, 
+   * we _cannot_ call eexit(i) here,
    * instead of playing with the Socket above. Sigh.
    */
   exit(i);
@@ -2214,7 +2214,7 @@ DEFINE_VARARGS_FN(Dummy)
 
 /*
  * '^' is allowed as an escape mechanism for control characters. jw.
- * 
+ *
  * Added time insertion using ideas/code from /\ndy Jones
  *   (andy@lingua.cltr.uq.OZ.AU) - thanks a lot!
  *
@@ -2520,12 +2520,12 @@ int rec;
   int truncper = 0;
   int trunclong = 0;
   struct backtick *bt;
- 
+
   if (winmsg_numrend >= 0)
     winmsg_numrend = 0;
   else
     winmsg_numrend = -winmsg_numrend;
-    
+
   tick = 0;
   tm = 0;
   ctrl = 0;
@@ -3176,7 +3176,7 @@ char *data;
 	  char ibuf = displays->d_OldMode.m_tchars.t_intrc;
 #endif
 #ifdef PSEUDOS
-	  write(W_UWP(fore) ? fore->w_pwin->p_ptyfd : fore->w_ptyfd, 
+	  write(W_UWP(fore) ? fore->w_pwin->p_ptyfd : fore->w_ptyfd,
 		&ibuf, 1);
 	  debug1("Backend wrote interrupt to %d", fore->w_number);
 	  debug1("%s\n", W_UWP(fore) ? " (pseudowin)" : "");
@@ -3274,7 +3274,7 @@ char *data;
 	      RethinkViewportOffsets(cv);
 	      if (n > cv->c_layer->l_height)
 		n = cv->c_layer->l_height;
-	      CV_CALL(cv, 
+	      CV_CALL(cv,
 		LScrollV(flayer, -n, 0, flayer->l_height - 1, 0);
 		LayRedisplayLine(-1, -1, -1, 1);
 		for (i = 0; i < n; i++)
@@ -3290,7 +3290,7 @@ char *data;
 	      RethinkViewportOffsets(cv);
 	      if (n > cv->c_layer->l_height)
 		n = cv->c_layer->l_height;
-	      CV_CALL(cv, 
+	      CV_CALL(cv,
 	        LScrollV(flayer, n, 0, cv->c_layer->l_height - 1, 0);
 		LayRedisplayLine(-1, -1, -1, 1);
 		for (i = 0; i < n; i++)
@@ -3310,7 +3310,7 @@ char *data;
 	      RethinkViewportOffsets(cv);
 	      if (n > cv->c_layer->l_width)
 		n = cv->c_layer->l_width;
-	      CV_CALL(cv, 
+	      CV_CALL(cv,
 		LayRedisplayLine(-1, -1, -1, 1);
 		for (i = 0; i < flayer->l_height; i++)
 		  {
@@ -3332,7 +3332,7 @@ char *data;
 	      RethinkViewportOffsets(cv);
 	      if (n > cv->c_layer->l_width)
 		n = cv->c_layer->l_width;
-	      CV_CALL(cv, 
+	      CV_CALL(cv,
 		LayRedisplayLine(-1, -1, -1, 1);
 		for (i = 0; i < flayer->l_height; i++)
 		  {
@@ -3393,9 +3393,9 @@ char *data;
 /*
  * Interprets ^?, ^@ and other ^-control-char notation.
  * Interprets \ddd octal notation
- * 
- * The result is placed in *cp, p is advanced behind the parsed expression and 
- * returned. 
+ *
+ * The result is placed in *cp, p is advanced behind the parsed expression and
+ * returned.
  */
 static char *
 ParseChar(p, cp)
@@ -3425,7 +3425,7 @@ char *p, *cp;
   return p;
 }
 
-static int 
+static int
 ParseEscape(p)
 char *p;
 {

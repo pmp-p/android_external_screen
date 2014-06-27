@@ -18,6 +18,8 @@ LOCAL_MODULE_TAGS := eng debug
 
 LOCAL_SHARED_LIBRARIES := libncurses
 
+LOCAL_LDLIBS := -L../android_external_libncurses/libs/armeabi/ -lncurses
+
 LOCAL_C_INCLUDES := 			\
 	$(LOCAL_PATH)/src
 

@@ -79,15 +79,15 @@
 /* #undef NOSYSLOG */
 
 
-/* 
- * define PTYMODE if you do not like the default of 0622, which allows 
+/*
+ * define PTYMODE if you do not like the default of 0622, which allows
  * public write to your pty.
  * define PTYGROUP to some numerical group-id if you do not want the
  * tty to be in "your" group.
  * Note, screen is unable to change mode or group of the pty if it
  * is not installed with sufficient privilege. (e.g. set-uid-root)
- * define PTYROFS if the /dev/pty devices are mounted on a read-only 
- * filesystem so screen should not even attempt to set mode or group  
+ * define PTYROFS if the /dev/pty devices are mounted on a read-only
+ * filesystem so screen should not even attempt to set mode or group
  * even if running as root (e.g. on TiVo).
  */
 #define PTYMODE 0620
@@ -206,8 +206,8 @@
  * if you want the user to be able to log her/his windows out.
  * (Meaning: They are there, but not visible in /etc/utmp).
  * Disabling this feature only makes sense if you have a secure /etc/utmp
- * database. 
- * Negative examples: suns usually have a world writable utmp file, 
+ * database.
+ * Negative examples: suns usually have a world writable utmp file,
  * xterm will run perfectly without s-bit.
  *
  * If LOGOUTOK is undefined and UTMPOK is defined, all windows are
@@ -264,7 +264,7 @@
 /*
  * Some terminals, e.g. Wyse 120, use a bitfield to select attributes.
  * This doesn't work with the standard so/ul/m? terminal entries,
- * because they will cancel each other out. 
+ * because they will cancel each other out.
  * On TERMINFO machines, "sa" (sgr) may work. If you want screen
  * to switch attributes only with sgr, define USE_SGR.
  * This is *not* recomended, do this only if you must.
@@ -396,14 +396,14 @@
  *
  * Only allow BSDWAIT i.e. wait3 on nonposix systems, since
  * posix implies wait(3) and waitpid(3). vdlinden@fwi.uva.nl
- * 
+ *
  */
 #ifndef POSIX
 #define BSDWAIT 1
 #endif
 
 /*
- * On RISCOS we prefer wait2() over wait3(). rouilj@sni-usa.com 
+ * On RISCOS we prefer wait2() over wait3(). rouilj@sni-usa.com
  */
 #ifdef BSDWAIT
 /* #undef USE_WAIT2 */
@@ -481,8 +481,8 @@
  * Define USEBCOPY if the bcopy/memcpy from your system's C library
  * supports the overlapping of source and destination blocks.  When
  * undefined, screen uses its own (probably slower) version of bcopy().
- * 
- * SYSV machines may have a working memcpy() -- Oh, this is 
+ *
+ * SYSV machines may have a working memcpy() -- Oh, this is
  * quite unlikely. Tell me if you see one.
  * "But then, memmove() should work, if at all available" he thought...
  * Boing, never say "works everywhere" unless you checked SCO UNIX.
@@ -575,11 +575,11 @@
  */
 #define HAVE_SVR4_PTYS 1
 
-/* 
+/*
  * define PTYRANGE0 and or PTYRANGE1 if you want to adapt screen
- * to unusual environments. E.g. For SunOs the defaults are "qpr" and 
- * "0123456789abcdef". For SunOs 4.1.2 
- * #define PTYRANGE0 "pqrstuvwxyzPQRST" 
+ * to unusual environments. E.g. For SunOs the defaults are "qpr" and
+ * "0123456789abcdef". For SunOs 4.1.2
+ * #define PTYRANGE0 "pqrstuvwxyzPQRST"
  * is recommended by Dan Jacobson.
  */
 /* #undef PTYRANGE0 */
@@ -725,5 +725,5 @@
 
 /* Define to 1 if you need to in order for `stat' and other things to work. */
 /* #undef _POSIX_SOURCE */
-       
+
 
