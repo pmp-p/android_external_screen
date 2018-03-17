@@ -12,7 +12,7 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3, or (at your option)
  * any later version.
- *  
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -31,6 +31,8 @@
 #ifndef sun	/* we want to know about TIOCPKT. */
 # include <sys/ioctl.h>
 #endif
+
+
 
 #include "config.h"
 #include "screen.h"
@@ -1575,7 +1577,7 @@ StringEnd()
       if (typ < 0 || typ > 2)
 	break;
 #endif
-      
+
       curr->w_stringp -= p - curr->w_string;
       if (curr->w_stringp > curr->w_string)
 	bcopy(p, curr->w_string, curr->w_stringp - curr->w_string);
@@ -2309,7 +2311,7 @@ RestorePosRendition()
   LSetRendition(&curr->w_layer, &curr->w_rend);
 }
 
-/* Send a terminal report as if it were typed. */ 
+/* Send a terminal report as if it were typed. */
 static void
 Report(fmt, n1, n2)
 char *fmt;
@@ -2835,7 +2837,7 @@ struct mline *ml;
   q = ml->attr; o = hml->attr; hml->attr = q; ml->attr = null;
   if (o != null)
     free(o);
- 
+
 #ifdef FONT
   q = ml->font; o = hml->font; hml->font = q; ml->font = null;
   if (o != null)

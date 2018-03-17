@@ -72,8 +72,8 @@
 #endif /* sun */
 
 #ifndef linux /* all done in <errno.h> */
-#ifndef android
-extern int errno;
+#ifndef __ANDROID__
+    extern int errno;
 #endif /* android */
 #endif /* linux */
 #ifndef HAVE_STRERROR
@@ -267,10 +267,10 @@ extern int errno;
 #  include <utmp.h>
 # endif /* SVR4 */
 # ifdef apollo
-   /* 
+   /*
     * We don't have GETUTENT, so we dig into utmp ourselves.
     * But we save the permanent filedescriptor and
-    * open utmp just when we need to. 
+    * open utmp just when we need to.
     * This code supports an unsorted utmp. jw.
     */
 #  define UTNOKEEP
@@ -447,7 +447,7 @@ extern int errno;
 # ifndef BSDWAIT /* if wait is NOT a union: */
 #  define WTERMSIG(status) (status & 0177)
 # else
-#  define WTERMSIG(status) status.w_T.w_Termsig 
+#  define WTERMSIG(status) status.w_T.w_Termsig
 # endif
 #endif
 
@@ -455,7 +455,7 @@ extern int errno;
 # ifndef BSDWAIT /* if wait is NOT a union: */
 #  define WSTOPSIG(status) ((status >> 8) & 0377)
 # else
-#  define WSTOPSIG(status) status.w_S.w_Stopsig 
+#  define WSTOPSIG(status) status.w_S.w_Stopsig
 # endif
 #endif
 
@@ -516,7 +516,7 @@ typedef struct fd_set { int fds_bits[1]; } fd_set;
 # define MAXPATHLEN 1024
 #endif
 
-/* 
+/*
  * you may try to vary this value. Use low values if your (VMS) system
  * tends to choke when pasting. Use high values if you want to test
  * how many characters your pty's can buffer.

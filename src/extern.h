@@ -499,3 +499,7 @@ extern int   PrepareEncodedChar __P((int));
 # endif
 #endif
 extern int   EncodeChar __P((char *, int, int, int *));
+
+
+#define index(a,b) strchr((a),(b))
+
